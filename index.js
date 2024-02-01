@@ -55,24 +55,20 @@ function Car(brand, model, year, mileage, fuelType, speed) {
 
 // Ми можемо перевизначити методи з Vehicle в Car.
 // Рядковому представленю прототипу Car призначаємо функцію яка повертає рядок: <brand> <model> <year> - <fuelType>.
-Car.prototype.Vehicle = function () {
-  return `${this.brand} ${this.model} ${this.year}`;
-}
+Car.prototype.toString = function () {
+  return `${this.brand} ${this.model} (${this.year}) - ${this.fuelType}`;
+};
 // Cтворюємо метод accelerate для прискорення швидкості прототипу Car, збільшує this.speed на передане число та виводить рядок в консоль: Автомобіль <brand> <model> прискорився до швидкості <speed> км/год
-Object.defineProperty(Car.prototype, "accelerate", {
-  value: (speed) => {
-    this.speed += speed;
-    console.log(`Автомобіль ${this.brand} ${this.model} прискорився до швидкості ${this.speed} км/год`);
-  },
-});
+Car.prototype.accelerate = function (increment) {
+  this.speed += increment;
+  console.log(`Автомобіль ${this.brand} ${this.model} прискорився до швидкості ${this.speed} км/год`);
+};
 
 // Метод brake для гальмування прототипу Car,зменшує this.speed на передане число та виводить рядок в консоль в консоль: Автомобіль <brand> <model> зменшив до швидкості <speed> км/год
-Object.defineProperty(Car.prototype, "brake", {
-  value: (speed) => {
-    this.speed -= speed;
-    console.log(`Автомобіль ${this.brand} ${this.model} зменшив до швидкості ${this.speed} км/год`);
-  },
-});
+Car.prototype.brake = function (decrement) {
+  this.speed -= decrement;
+  console.log(`Автомобіль ${this.brand} ${this.model} зменшив до швидкості ${this.speed} км/год`);
+};
 
 // Створюємо новий екземпляр об'єкта Car
 let car = new Car("Audi", "A6", 2018, 30000, "Petrol", 0);
